@@ -1,0 +1,14 @@
+{
+  "checkItems": [
+    {
+      "id": 1,
+      "title": "Leather Jacket",
+      "description": "유연한 재질의 실용도 높은 가죽자켓입니다.",
+      "price": 199000,
+      "image": "./data/004.png",
+      "company": "9UCCI",
+      "count": 1
+
+    }
+  ]
+}
