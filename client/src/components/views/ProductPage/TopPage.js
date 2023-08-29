@@ -1,14 +1,10 @@
 import React from "react";
-import {ProductList} from "../../Products/list"
-import Head from '../../Main/MainHeader';
-
+import { ProductList } from "../../Products/list";
 
 export default function TopPage() {
-  
-        
-  return(
+  return (
     <div>
-      <Head></Head>
-      <ProductList/>
+      <ProductList />
     </div>
-  )};
+  );
+}

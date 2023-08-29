@@ -1,7 +1,6 @@
 import React, {useState,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
-import Header from '../../Main/MainHeader';
 import { MyPageNav } from '../../Mypage/MypageNav';
 import axios from "axios";
 
@@ -21,7 +20,6 @@ function OrderTrackingPage() {
 
 
   return (<>
-    <Header/>
     <Div><MyPageNav/></Div>
       <Title>
         <h4>[주문/배송 조회하기]</h4>
