@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink, Form } from "react-router-dom";
 import axios from "axios";
 import HeaderCartBtn from "./HeaderCartBtn";
 
@@ -22,141 +22,76 @@ function Header(props) {
   };
 
   return (
-    <StyledDiv>
-      <ImgBlock src="https://cdn.discordapp.com/attachments/1065825998043631636/1069539124203241502/001.png" />
-      <LogoLink to="/">9UCCI</LogoLink>
-      <StyledNav>
-        {!isLogin && !isAdmin && (
-          <>
-            <JoinLink to="/join">JOIN</JoinLink>
-            <LoginLink to="/login">LOGIN</LoginLink>
-          </>
-        )}
-        {isLogin && (
-          <>
-            <StyledButton onClick={LogoutHandler}>LOGOUT</StyledButton>
-            <MypageLink to="/mypage">MY PAGE</MypageLink>
-          </>
-        )}
-        {isAdmin && (
-          <>
-            <AdminLink to="/admin">ADMIN</AdminLink>
-            <StyledButton onClick={LogoutHandler}>LOGOUT</StyledButton>
-            <MypageLink to="/mypage">MY PAGE</MypageLink>
-          </>
-        )}
-        <HeaderCartBtn onClick={props.onShowCart} />
-      </StyledNav>
-      <StyledCategory>
-        <TopLink to="/top">TOP</TopLink>
-        <BottomLink to="/bottom">BOTTOM</BottomLink>
-        <Link to="/outer">OUTER</Link>
-      </StyledCategory>
-    </StyledDiv>
+    <Nav>
+      <div>
+        <ul className="nav-list">
+          <ul>
+            <NavLink to="/products">
+              <h3>SHOP</h3>
+            </NavLink>
+          </ul>
+          <ul>
+            {/* <NavLink to="/cart">
+                <h3>CART</h3>
+              </NavLink> */}
+            <HeaderCartBtn onClick={props.onShowCart} />
+          </ul>
+          <ul>
+            <NavLink to="/auth?mode=login">
+              <h3>LOGIN/JOIN</h3>
+            </NavLink>
+          </ul>
+          <ul>
+            <NavLink to="/mypage">
+              <h3>MY PAGE</h3>
+            </NavLink>
+          </ul>
+          <ul>
+            <Form action="/logout" method="post" className="logout-btn">
+              <button>
+                <h3>LOGOUT</h3>
+              </button>
+            </Form>
+          </ul>
+        </ul>
+      </div>
+    </Nav>
   );
 }
 
 export default Header;
 
-const StyledDiv = styled.div`
+const Nav = styled.div`
   display: flex;
-  justify-content: center;
-`;
-const ImgBlock = styled.img`
-  //   position : absolute;
-  width: 1653px;
-  height: 306px;
-  object-fit: cover;
-  filter: brightness(70%);
-`;
-const LogoLink = styled(Link)`
-  margin: 71px 703px 205px 681px;
-  position: absolute;
-  width: 260px;
-  height: 30px;
+  justify-content: left;
+  margin: 20px;
+  position:relative
 
-  font-style: normal;
-  font-weight: 700;
-  font-size: 70px;
-  line-height: 30px;
-
-  text-align: center;
-
-  text-decoration: none;
-  color: #ffffff;
-`;
-const StyledNav = styled.div`
-  margin: 28px 40px 260px 1319px;
-  position: absolute;
-
-  a {
-    text-decoration: none;
-    color: #ffffff;
-
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    text-align: center;
+  h3{
+    font-size: 20px;
   }
-`;
-const JoinLink = styled(Link)`
-  margin-right: 73px;
-  width: 36px;
-  height: 18px;
-`;
-
-const LoginLink = styled(Link)`
-  margin-right: 73px;
-  width: 47px;
-  height: 18px;
-`;
-const AdminLink = styled(Link)`
-  margin-right: 40px;
-  width: 47px;
-  height: 18px;
-`;
-const MypageLink = styled(Link)`
-  width: 68px;
-  height: 18px;
-`;
-const CartLink = styled(Link)`
-  width: 36px;
-  height: 18px;
-`;
-const StyledCategory = styled.div`
-  position: absolute;
-  margin: 243px 149px 33px 148px;
-
-  a {
-    text-decoration: none;
-    color: #ffffff;
-
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 30px;
-    text-align: center;
+  .nav-list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    
   }
-`;
-const TopLink = styled(Link)`
-  margin-right: 553px;
-`;
-
-const BottomLink = styled(Link)`
-  margin-right: 553px;
-`;
-
-const StyledButton = styled.button`
-  border: none;
-  background-color: transparent;
-
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  text-align: center;
-
-  width: 65px;
-  height: 18px;
-
-  color: #ffffff;
-  padding-right: 100px;
+  .nav-list a {
+    text-decoration: none;
+    display: flex;
+    color: black;
+    font-family: "Nanum Myeongjo";
+    
+  }
+  .logout-btn {
+    margin: 0;
+  }
+  button {
+    border: white solid 0px;
+    background: none;
+    font-family: "Nanum Myeongjo";
+    cursor: pointer;
+    padding: 0
+  }
+  }
 `;
