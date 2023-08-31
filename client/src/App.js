@@ -2,24 +2,24 @@ import "./App.css";
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import LandingPage from "./components/views/LandingPage/LandingPage";
-import LoginPage from "./components/views/LoginPage/LoginPage";
-import RegisterPage from "./components/views/RegisterPage/RegisterPage";
+import LandingPage from "./components/views/LandingPage";
+import LoginPage from "./components/views/LoginPage";
+import RegisterPage from "./components/views/RegisterPage";
 import TopPage from "./components/views/ProductPage/TopPage";
 import ProductDetailPage from "./components/views/ProductPage/ProductDetailPage";
-import CartPage from "./components/views/CartPage/CartPage";
-import BuyPage from "./components/views/BuyPage/BuyPage";
+import CartPage from "./components/views/CartPage";
+import BuyPage from "./components/views/BuyPage";
 // import OrderCompletePage from "./components/views/BuyPage/OrderCompletePage";
-import JoinPage from "./components/views/JoinPage/JoinPage";
-import AdminPage from "./components/views/AdminPage/AdminPage";
-import MyPage from "./components/views/MyPage/MyPage";
-import EditPage from "./components/views/EditPage/EditPage";
-import OrderTrackingPage from "./components/views/MyPage/OrderTrackingPage";
-import ProductEditPage from "./components/views/EditPage/ProductEditPage";
-import ProductPostPage from "./components/views/PostPage/ProductPostPage";
-import DeleteOrderPage from "./components/views/MyPage/DeleteOrderPage";
-import ProductGetPage from "./components/views/PostPage/ProductGetPage";
-import RootLayout from "./components/views/LandingPage/RootLayout";
+import JoinPage from "./components/views/JoinPage";
+import AdminPage from "./components/views/AdminPage";
+import MyPage from "./components/views/MyPage";
+import EditPage from "./components/views/EditPage";
+import OrderTrackingPage from "./components/views/OrderTrackingPage";
+import ProductEditPage from "./components/views/ProductEditPage";
+import ProductPostPage from "./components/views/ProductPostPage";
+import DeleteOrderPage from "./components/views/DeleteOrderPage";
+import ProductGetPage from "./components/views/ProductGetPage";
+import RootLayout from "./components/views/RootLayout";
 
 const router = createBrowserRouter([
   {

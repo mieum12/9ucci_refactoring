@@ -1,18 +1,16 @@
 import React from "react";
-import { MyPageNav } from "../../Mypage/MypageNav";
 import styled from "styled-components";
-import MyPageBody from "../../Mypage/MypageBody";
+import ProductGet from "../Admin/ProductGet";
 
-const MyPage = () => {
+const ProductGetPage = () => {
   return (
     <Div>
-      <MyPageNav></MyPageNav>
-      <MyPageBody></MyPageBody>
+      <ProductGet></ProductGet>
     </Div>
   );
 };
 
-export default MyPage;
+export default ProductGetPage;
 
 const Div = styled.div`
   display: flex;

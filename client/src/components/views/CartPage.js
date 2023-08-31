@@ -1,7 +1,7 @@
 import React from "react";
-import { MyPageNav } from "../../Mypage/MypageNav";
-import { CartTable } from "../../Cart/CartTable";
-import { CartButtons } from "../../Cart/CartButtons";
+import { MyPageNav } from "../Mypage/MypageNav";
+import { CartTable } from "../Cart/CartTable";
+import { CartButtons } from "../Cart/CartButtons";
 import styled from "styled-components";
 
 function CartPage() {

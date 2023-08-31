@@ -1,16 +1,18 @@
 import React from "react";
+import { BuyPageBody } from "../Buy/BuypageBody";
+import { MyPageNav } from "../Mypage/MypageNav";
 import styled from "styled-components";
-import ProductGet from "../../Admin/ProductGet";
 
-const ProductGetPage = () => {
+function BuyPage() {
   return (
     <Div>
-      <ProductGet></ProductGet>
+      <MyPageNav></MyPageNav>
+      <BuyPageBody />
     </Div>
   );
-};
+}
 
-export default ProductGetPage;
+export default BuyPage;
 
 const Div = styled.div`
   display: flex;

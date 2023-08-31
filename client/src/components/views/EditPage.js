@@ -1,18 +1,16 @@
 import React from "react";
-import { BuyPageBody } from "../../Buy/BuypageBody";
-import { MyPageNav } from "../../Mypage/MypageNav";
+import Update from "../Edit/Update";
 import styled from "styled-components";
 
-function BuyPage() {
+const EditPage = () => {
   return (
     <Div>
-      <MyPageNav></MyPageNav>
-      <BuyPageBody />
+      <Update></Update>
     </Div>
   );
-}
+};
 
-export default BuyPage;
+export default EditPage;
 
 const Div = styled.div`
   display: flex;

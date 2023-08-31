@@ -10,8 +10,9 @@ const HeaderCartBtn = (props) => {
   // });
   return (
     <button onClick={props.onClick}>
+      <div>🛒</div>
       <div>CART</div>
-      {/* <div>{cartItemNum}</div> */}
+      <div>3</div>
     </button>
   );
 };
