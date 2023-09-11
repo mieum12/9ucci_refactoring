@@ -5,9 +5,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./components/views/LandingPage";
 import LoginPage from "./components/views/LoginPage";
 import RegisterPage from "./components/views/RegisterPage";
-import TopPage from "./components/views/(구)ProductPage/TopPage";
-import ProductDetailPage from "./components/views/(구)ProductPage/ProductDetailPage";
-import CartPage from "./components/views/CartPage";
 import BuyPage from "./components/views/BuyPage";
 // import OrderCompletePage from "./components/views/BuyPage/OrderCompletePage";
 import JoinPage from "./components/views/JoinPage";
@@ -34,8 +31,6 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "products", element: <ProductsPage /> },
-      { path: "detail", element: <ProductDetailPage /> },
-      { path: "cart", element: <CartPage /> },
       { path: "buypage", element: <BuyPage /> },
       { path: "mypage", element: <MyPage /> },
       { path: "join", element: <JoinPage /> },

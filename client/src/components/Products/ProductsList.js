@@ -1,89 +1,81 @@
-/* eslint-disable no-unused-vars */
-import axios from "axios";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Detail } from "./detail";
-import { Link } from "react-router-dom";
+import ProductItem from "./ProductItem";
 
-export function ProductsList() {
-  const products = [
-    {
-      id: "p1",
-      title: "셔츠",
-      description: "하늘색 가을 셔츠 사고싶다",
-      price: "300000",
-    },
-    {
-      id: "p2",
-      title: "니트",
-      description: "까만색 깔끔한 니트도 사고싶다",
-      price: "600000",
-    },
-  ];
+const ProductsList = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [httpError, setHttpError] = useState();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      const response = await fetch(
+        "https://react-cart-88b00-default-rtdb.firebaseio.com//products.json"
+      );
+
+      if (!response.ok) {
+        throw new Error("오류가 발생했습니다!!!");
+      }
+
+      const responseData = await response.json();
+
+      const loadProducts = [];
+
+      //key는 우리가 가져오는 id
+      for (const key in responseData) {
+        loadProducts.push({
+          id: key,
+          name: responseData[key].name,
+          description: responseData[key].description,
+          price: responseData[key].price,
+        });
+      }
+
+      setProducts(loadProducts);
+      setIsLoading(false);
+    };
+
+    //fetchProducts는 async function이고 항상 promise를 반환한다
+    //그래서 promise 대신 오류를 가져오는 경우 그 오류로 인해 해당 promise가 가부하게 된다 -> 그래서 try catch로 에러를 잡을 수 없다
+
+    //promise 내부의 error 다루는 방법
+    fetchProducts()
+      .then()
+      .catch((error) => {
+        setIsLoading(false);
+        setHttpError(error.message);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section>
+        <h1> Loading...</h1>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section>
+        <h1>{httpError}</h1>
+      </section>
+    );
+  }
+
+  const productsList = products.map((product) => (
+    <ProductItem
+      id={product.id}
+      key={product.id}
+      name={product.name}
+      description={product.description}
+      price={product.price}
+    />
+  ));
   return (
-    <ProductsContainer>
-      <div>전체 상픔 수 (3)</div>
-      <div className="products">
-        <ul className="list">
-          {products.map((products) => (
-            <li key={products.id} className="item">
-              <Link to={products.id}>
-                <img src={products.image} alt={products.title} />
-                <div className="content">
-                  <div>{products.title}</div>
-                  <div>{products.price}</div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </ProductsContainer>
+    <section>
+      <ul>{productsList}</ul>
+    </section>
   );
-}
-
+};
 export default ProductsList;
-
-const ProductsContainer = styled.div`
-  .products {
-    margin: 3rem auto;
-  }
-
-  .list {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .item {
-    list-style-type: none;
-  }
-  .item a {
-    padding: 0rem 4rem 2rem;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .item a:hover {
-    transform: scale(1.02);
-  }
-
-  .item img {
-    border-radius: 4px;
-    height: 20rem;
-    object-fit: cover;
-  }
-
-  .content {
-    padding: 1rem;
-  }
-  .item h2 {
-    margin: 0 0 1rem 0;
-  }
-`;
