@@ -5,8 +5,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./components/views/LandingPage";
 import LoginPage from "./components/views/LoginPage";
 import RegisterPage from "./components/views/RegisterPage";
-import TopPage from "./components/views/ProductPage/TopPage";
-import ProductDetailPage from "./components/views/ProductPage/ProductDetailPage";
+import TopPage from "./components/views/(구)ProductPage/TopPage";
+import ProductDetailPage from "./components/views/(구)ProductPage/ProductDetailPage";
 import CartPage from "./components/views/CartPage";
 import BuyPage from "./components/views/BuyPage";
 // import OrderCompletePage from "./components/views/BuyPage/OrderCompletePage";
@@ -20,6 +20,7 @@ import ProductPostPage from "./components/views/ProductPostPage";
 import DeleteOrderPage from "./components/views/DeleteOrderPage";
 import ProductGetPage from "./components/views/ProductGetPage";
 import RootLayout from "./components/views/RootLayout";
+import ProductsPage from "./components/views/ProductsPage";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
-      { path: "top", element: <TopPage /> },
+      { path: "products", element: <ProductsPage /> },
       { path: "detail", element: <ProductDetailPage /> },
       { path: "cart", element: <CartPage /> },
       { path: "buypage", element: <BuyPage /> },

@@ -1,6 +1,6 @@
 import Modal from "./Modal";
 
-const Cart = (props) => {
+const CartModal = (props) => {
   const cartItems = (
     <ul>
       {[{ id: "c1", name: "cart-test-1", amount: 2, price: "30000" }].map(
@@ -25,4 +25,4 @@ const Cart = (props) => {
   );
 };
 
-export default Cart;
+export default CartModal;

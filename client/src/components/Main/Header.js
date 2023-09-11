@@ -26,9 +26,7 @@ function Header(props) {
       <div>
         <ul className="nav-list">
           <ul>
-            <NavLink to="/products">
-              <h3>SHOP</h3>
-            </NavLink>
+            <NavLink to="/products">SHOP</NavLink>
           </ul>
           <ul>
             {/* <NavLink to="/cart">
@@ -37,20 +35,14 @@ function Header(props) {
             <HeaderCartBtn onClick={props.onShowCart} />
           </ul>
           <ul>
-            <NavLink to="/auth?mode=login">
-              <h3>LOGIN/JOIN</h3>
-            </NavLink>
+            <NavLink to="/login">LOGIN/JOIN</NavLink>
           </ul>
           <ul>
-            <NavLink to="/mypage">
-              <h3>MY PAGE</h3>
-            </NavLink>
+            <NavLink to="/mypage">MY PAGE</NavLink>
           </ul>
           <ul>
             <Form action="/logout" method="post" className="logout-btn">
-              <button>
-                <h3>LOGOUT</h3>
-              </button>
+              <button>LOGOUT</button>
             </Form>
           </ul>
         </ul>
@@ -67,8 +59,8 @@ const Nav = styled.div`
   margin: 20px;
   position:relative
 
-  h3{
-    font-size: 20px;
+  ul{
+    font-size: 10px;
   }
   .nav-list {
     display: flex;

@@ -11,9 +11,7 @@ const HeaderCartBtn = (props) => {
   // });
   return (
     <CartBtn>
-      <button onClick={props.onClick}>
-        <h3>CART (3)</h3>
-      </button>
+      <button onClick={props.onClick}>CART (3)</button>
     </CartBtn>
   );
 };
@@ -25,7 +23,7 @@ const CartBtn = styled.div`
     border: white solid 0px;
     background: none;
     font-family: "Nanum Myeongjo";
-    font-size: 20px;
+    font-size: auto;
     cursor: pointer;
     padding: 0;
   }

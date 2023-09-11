@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Header from "../Main/Header";
 import CartProvider from "../../store/CartProvider";
 import { useState } from "react";
-import Cart from "../Cart/Cart";
+import CartModal from "../Cart/CartModal";
+import Footer from "../Footer/Footer";
 
 export default function RootLayout() {
   // cart버튼 누르면 모달이 열리게 설계
@@ -19,7 +20,7 @@ export default function RootLayout() {
   return (
     <Root>
       <CartProvider>
-        {cartIsShown && <Cart onClose={hideCartHandler} />}
+        {cartIsShown && <CartModal onClose={hideCartHandler} />}
         <header className="title">
           <NavLink to="/">
             <h1>9UCCI</h1>
@@ -30,6 +31,7 @@ export default function RootLayout() {
           <Outlet />
         </main>
       </CartProvider>
+      <Footer />
     </Root>
   );
 }
@@ -46,7 +48,7 @@ const Root = styled.div`
     margin: 20px;
     width: 300px;
     font-family: "Nanum Myeongjo";
-    font-size: 100px;
+    font-size: 50px;
   }
   .main-container {
     text-align: center;
