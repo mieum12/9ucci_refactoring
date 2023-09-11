@@ -38,7 +38,7 @@ const ProductItemForm = (props) => {
           defaultValue: "1",
         }}
       />
-      <button>+ Add</button>
+      <button>+ CART</button>
       {!amountIsValid && <p>1~10개의 상품을 입력해 주세요!</p>}
     </form>
   );
