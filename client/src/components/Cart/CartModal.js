@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import CheckOrderForm from "./CheckOrderForm";
 import CartItem from "./CartItem";
 import CartContext from "../../store/cart-context";
+import styled from "styled-components";
 
 const CartModal = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
@@ -10,7 +11,7 @@ const CartModal = (props) => {
   const [submitIsDone, setSubmitIsDone] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const totalAmount = `${cartCtx.totalAmount.toLocaleString("ko-KR")}원`;
 
   //장바구니에 상품이 비면 주문 버튼이 안보이도록 장바구니 확인
   const hasItems = cartCtx.items.length > 0;
@@ -47,7 +48,7 @@ const CartModal = (props) => {
   };
 
   const cartItems = (
-    <ul>
+    <div>
       {cartCtx.items.map((item) => (
         <CartItem
           key={item.id}
@@ -58,24 +59,24 @@ const CartModal = (props) => {
           onAdd={cartItemAddHandler.bind(null, item)}
         />
       ))}
-    </ul>
+    </div>
   );
 
   const modalActions = (
-    <div>
+    <ModalBtn>
       <button onClick={props.onClose}>Close</button>
       {hasItems && <button onClick={orderHandler}>Order</button>}
-    </div>
+    </ModalBtn>
   );
 
   //1. 아직 쇼핑중~ 제출 전인 상태
   const cartModalContent = (
     <React.Fragment>
       {cartItems}
-      <div>
-        <span>Total Amount</span>
+      <Total>
+        <span>총 결제 금액 :</span>
         <span>{totalAmount}</span>
-      </div>
+      </Total>
       {isCheckout && (
         <CheckOrderForm
           onConfirm={submitOrderHandler}
@@ -87,16 +88,22 @@ const CartModal = (props) => {
   );
 
   //2. 제출중인 경우
-  const isSubmittingModalContent = <p>주문을 접수하는 중입니다!</p>;
+  const isSubmittingModalContent = (
+    <IsSubmittingContainer>
+      <p>주문을 접수하는 중입니다!</p>
+    </IsSubmittingContainer>
+  );
 
   //3. 주문서가 제출 완료된 경우
   const submitIsDoneModalContent = (
     //React.Fragment로 감싸는 이유는 형제 JSX를 만들기 위해 하나의 태그로 감싸주는 것
     <React.Fragment>
-      <p>주문이 성공적으로 접수되었습니다!</p>
-      <div>
-        <button onClick={props.onClose}>Close</button>
-      </div>
+      <SubmitDoneContainer>
+        <p>✅ 주문이 성공적으로 접수되었습니다!</p>
+        <div>
+          <button onClick={props.onClose}>Close</button>
+        </div>
+      </SubmitDoneContainer>
     </React.Fragment>
   );
 
@@ -110,3 +117,55 @@ const CartModal = (props) => {
 };
 
 export default CartModal;
+
+const Total = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-weight: bold;
+  margin: 20px 10px;
+`;
+
+const ModalBtn = styled.div`
+  button {
+    font: inherit;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid;
+    padding: 10px 30px;
+    border-radius: 25px;
+    margin-left: 10px;
+  }
+
+  button:hover,
+  button:active {
+    background-color: black;
+    border-color: black;
+    color: white;
+  }
+`;
+const IsSubmittingContainer = styled.div`
+  text-align: center;
+  padding: 100px;
+`;
+const SubmitDoneContainer = styled.div`
+  text-align: center;
+  padding: 100px;
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid;
+    padding: 10px 30px;
+    border-radius: 25px;
+    margin-left: 10px;
+  }
+
+  button:hover,
+  button:active {
+    background-color: black;
+    border-color: black;
+    color: white;
+  }
+`;

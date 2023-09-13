@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import styled from "styled-components";
 
 //입력값 검증을 위해 비어있는지 번호가 11자리 인지 검증
 const isEmpty = (value) => value.trim() === "";
@@ -64,42 +65,96 @@ const CheckOrderForm = (props) => {
 
   return (
     <form onSubmit={confirmHandler}>
-      {/* 1.이렇게 바로 클래스 이름 변경 코드 짜기 */}
-      <div>
-        <label htmlFor="name">이름</label>
-        <input type="text" id="name" ref={nameInputRef} />
-        {!formInputsValidity.name && <p>유효한 이름을 입력해 주세요!</p>}
-      </div>
+      <FromContainer>
+        <div className="order-title">🚀 배송 정보 🚀</div>
+        <div className="control">
+          <label htmlFor="name">이름</label>
+          <input type="text" id="name" ref={nameInputRef} />
+          {!formInputsValidity.name && (
+            <p className="invalid">유효한 이름을 입력해 주세요!</p>
+          )}
+        </div>
 
-      <div>
-        <label htmlFor="address">주소</label>
-        <input type="text" id="address" ref={addressInputRef} />
-        {!formInputsValidity.address && <p>유효한 주소를 입력해 주세요!</p>}
-      </div>
-      <div>
-        <label htmlFor="detail">상세주소</label>
-        <input type="text" id="detail" ref={detailAddressInputRef} />
-        {!formInputsValidity.detailAddress && (
-          <p>유효한 상세주소를 입력해 주세요!</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="phone">연락처( - 제외 ex.01012345678)</label>
-        <input type="text" id="phone" ref={phoneInputRef} />
-        {!formInputsValidity.phone && (
-          <p>유효한 연락처 11자리를 입력해 주세요!</p>
-        )}
-      </div>
+        <div>
+          <label htmlFor="address">주소</label>
+          <input type="text" id="address" ref={addressInputRef} />
+          {!formInputsValidity.address && (
+            <p className="invalid">유효한 주소를 입력해 주세요!</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="detail">상세주소</label>
+          <input type="text" id="detail" ref={detailAddressInputRef} />
+          {!formInputsValidity.detailAddress && (
+            <p className="invalid">유효한 상세주소를 입력해 주세요!</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="phone">연락처(ex.01012345678)</label>
+          <input type="text" id="phone" ref={phoneInputRef} />
+          {!formInputsValidity.phone && (
+            <p className="invalid">유효한 연락처 11자리를 입력해 주세요!</p>
+          )}
+        </div>
 
-      {/* 취소 버튼은 양식을 제출하지 않게 타입을 버튼으로 지정해준다 */}
-      <div>
-        <button type="button" onClick={props.onCancel}>
-          Cancel
-        </button>
-        <button>Confirm</button>
-      </div>
+        {/* 취소 버튼은 양식을 제출하지 않게 타입을 버튼으로 지정해준다 */}
+        <FormBtn>
+          <button type="button" onClick={props.onCancel}>
+            Cancel
+          </button>
+          <button>Confirm</button>
+        </FormBtn>
+      </FromContainer>
     </form>
   );
 };
 
 export default CheckOrderForm;
+
+const FromContainer = styled.div`
+  height: 250px;
+  overflow: auto;
+  text-align: center;
+
+  .order-title {
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+
+  input {
+    font: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 20rem;
+    max-width: 100%;
+  }
+
+  .invalid {
+    color: #ca3e51;
+  }
+`;
+
+const FormBtn = styled.div`
+  button {
+    font: inherit;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid;
+    padding: 10px 30px;
+    border-radius: 25px;
+    margin: 30px 10px;
+  }
+
+  button:hover,
+  button:active {
+    background-color: black;
+    border-color: black;
+    color: white;
+  }
+`;

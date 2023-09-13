@@ -1,22 +1,8 @@
 import React from "react";
-import { MyPageNav } from "../Mypage/MypageNav";
-import styled from "styled-components";
 import MyPageBody from "../Mypage/MypageBody";
 
 const MyPage = () => {
-  return (
-    <Div>
-      <MyPageNav></MyPageNav>
-      <MyPageBody></MyPageBody>
-    </Div>
-  );
+  return <MyPageBody />;
 };
 
 export default MyPage;
-
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;

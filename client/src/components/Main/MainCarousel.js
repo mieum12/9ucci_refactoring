@@ -10,17 +10,17 @@ const MainCarousel = () => {
       <Carousel fade>
         <Carousel.Item>
           <Link to="/products">
-            <Img src="https://images.pexels.com/photos/5007234/pexels-photo-5007234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></Img>
+            <Img src="http://img.marieclairekorea.com/2019/03/mck_5c7dd9e2df601-562x708.jpg"></Img>
           </Link>
         </Carousel.Item>
         <Carousel.Item>
           <Link to="/products">
-            <Img src="https://images.pexels.com/photos/2356344/pexels-photo-2356344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></Img>
+            <Img src="http://img.marieclairekorea.com/2019/03/mck_5c7ddae02807c-562x708.jpg"></Img>
           </Link>
         </Carousel.Item>
         <Carousel.Item>
           <Link to="/products">
-            <Img src="https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></Img>
+            <Img src="http://img.marieclairekorea.com/2019/03/mck_5c7ddbb8b8d24-562x708.jpg"></Img>
           </Link>
         </Carousel.Item>
       </Carousel>
@@ -37,6 +37,5 @@ const CarouselContainer = styled.div`
 `;
 
 const Img = styled.img`
-  width: 700px;
   height: 400px;
 `;

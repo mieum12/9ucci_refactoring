@@ -10,7 +10,7 @@ const ProductsList = () => {
     const fetchProducts = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://react-cart-88b00-default-rtdb.firebaseio.com//products.json"
+        "https://react-cart-88b00-default-rtdb.firebaseio.com/products.json"
       );
 
       if (!response.ok) {
@@ -49,17 +49,18 @@ const ProductsList = () => {
 
   if (isLoading) {
     return (
-      <section>
+      <div>
         <h1> Loading...</h1>
-      </section>
+        <div>상품 리스트를 가져오는 중입니다</div>
+      </div>
     );
   }
 
   if (httpError) {
     return (
-      <section>
+      <div>
         <h1>{httpError}</h1>
-      </section>
+      </div>
     );
   }
 
@@ -73,9 +74,9 @@ const ProductsList = () => {
     />
   ));
   return (
-    <section>
+    <div>
       <ul>{productsList}</ul>
-    </section>
+    </div>
   );
 };
 export default ProductsList;

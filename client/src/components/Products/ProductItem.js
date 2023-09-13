@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
-  const price = `$${props.price.toFixed(2)}`; //소수점 두자리까지
+  const price = `${props.price.toLocaleString("ko-KR")}원`;
 
   const addToCartHandler = (amount) => {
     cartCtx.addItem({
@@ -22,7 +22,7 @@ const ProductItem = (props) => {
         <img
           src="https://pbs.twimg.com/media/FCy6QQ8VIA0uToe?format=jpg&name=medium"
           alt={props.name}
-          style={{ height: "200px" }}
+          style={{ height: "100px" }}
         />
       </div>
       <div>
@@ -43,5 +43,6 @@ export default ProductItem;
 const ProductItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 30px 280px;
+  margin: 30px 200px;
+  font-size: auto;
 `;

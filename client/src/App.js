@@ -5,13 +5,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./components/views/LandingPage";
 import LoginPage from "./components/views/LoginPage";
 import RegisterPage from "./components/views/RegisterPage";
-import BuyPage from "./components/views/BuyPage";
-// import OrderCompletePage from "./components/views/BuyPage/OrderCompletePage";
 import JoinPage from "./components/views/JoinPage";
 import AdminPage from "./components/views/AdminPage";
 import MyPage from "./components/views/MyPage";
 import EditPage from "./components/views/EditPage";
-import OrderTrackingPage from "./components/views/OrderTrackingPage";
 import ProductEditPage from "./components/views/ProductEditPage";
 import ProductPostPage from "./components/views/ProductPostPage";
 import DeleteOrderPage from "./components/views/DeleteOrderPage";
@@ -31,12 +28,10 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "products", element: <ProductsPage /> },
-      { path: "buypage", element: <BuyPage /> },
       { path: "mypage", element: <MyPage /> },
       { path: "join", element: <JoinPage /> },
       { path: "admin", element: <AdminPage /> },
       { path: "edit", element: <EditPage /> },
-      { path: "ordertracking", element: <OrderTrackingPage /> },
       { path: "productedit", element: <ProductEditPage /> },
       { path: "productpost", element: <ProductPostPage /> },
       { path: "deleteorder", element: <DeleteOrderPage /> },

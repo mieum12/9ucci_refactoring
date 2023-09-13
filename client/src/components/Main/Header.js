@@ -29,9 +29,6 @@ function Header(props) {
             <NavLink to="/products">SHOP</NavLink>
           </ul>
           <ul>
-            {/* <NavLink to="/cart">
-                <h3>CART</h3>
-              </NavLink> */}
             <HeaderCartBtn onClick={props.onShowCart} />
           </ul>
           <ul>
@@ -72,7 +69,6 @@ const Nav = styled.div`
     text-decoration: none;
     display: flex;
     color: black;
-    font-family: "Nanum Myeongjo";
     
   }
   .logout-btn {
@@ -81,7 +77,6 @@ const Nav = styled.div`
   button {
     border: white solid 0px;
     background: none;
-    font-family: "Nanum Myeongjo";
     cursor: pointer;
     padding: 0
   }

@@ -44,7 +44,6 @@ const CartBtn = styled.div`
   button {
     border: white solid 0px;
     background: none;
-    font-family: "Nanum Myeongjo";
     font-size: auto;
     cursor: pointer;
     padding: 0;
