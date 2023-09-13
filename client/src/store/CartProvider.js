@@ -9,7 +9,7 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
   //1.카트에 아이템 추가
   if (action.type === "ADD") {
-    // (전체 상품의 수량)
+    // 전체 상품의 수량
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
 
@@ -20,6 +20,7 @@ const cartReducer = (state, action) => {
     // 그 인덱스를 갖는 아이템을 변수로 지정한다
     // existingCartItem가 있는 경우 작동하게 되고 없으면 그냥 null로 끝
     const existingCartItem = state.items[existingCartItemIndex];
+
     let updatedItems;
 
     // 1-1.이미 중복된 아이템이 있는 경우
@@ -28,13 +29,14 @@ const cartReducer = (state, action) => {
         ...existingCartItem, //기존의 아이템
         amount: existingCartItem.amount + action.item.amount, //수량만 추가
       };
-      // 기존 존재하는 아이템을 updatedItem으로 덮기
-      updatedItems = [...state.item];
+      updatedItems = [...state.items];
+      //기존 존재하는 항목을 updatedItem로 덮어쓰기
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
-      // 1-2.중복된 아이템이 없고 새로운 아이템을 추가하는 경우
+      //1-2.중복된 아이템이 없고 새로운 아이템을 추가하는 경우
       updatedItems = state.items.concat(action.item);
     }
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
@@ -43,17 +45,39 @@ const cartReducer = (state, action) => {
 
   //2.카트 아이템 삭제
   if (action.type === "REMOVE") {
+    //기존의 아이템 찾기
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const existingItem = state.items[existingCartItemIndex];
+    const updatedTotalAmount = state.totalAmount - existingItem.price;
+
+    let updatedItems;
+    //1보다 작으면 삭제하고 1 보다 크면 계속 카트에 두고 수량만 줄이고싶다
+    if (existingItem.amount === 1) {
+      //그대로 둘 상품
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.items]; //일단 기존의 항목을 가져온다
+      updatedItems[existingCartItemIndex] = updatedItem; //기존 항목이 들어있는 새 배열을 만든다
+    }
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
   }
 
-  //3.카트를 전체 비울때
+  //3. 카트 전체 비우기
   if (action.type === "CLEAR") {
     return defaultCartState;
   }
+
   return defaultCartState;
 };
 
-// cart-context의 데이터를 관리하고
-// 접근하려는 모든 컴포넌트에 그 데이터를 제공하는 역할을 한다
+//cart-context의 데이터를 관리하고, 접근하려는 모든 컴포넌트에 그 데이터를 제공하는 역할을 한다
 const CartProvider = (props) => {
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
@@ -86,5 +110,4 @@ const CartProvider = (props) => {
     </CardContext.Provider>
   );
 };
-
 export default CartProvider;

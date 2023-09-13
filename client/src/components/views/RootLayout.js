@@ -4,7 +4,7 @@ import Header from "../Main/Header";
 import CartProvider from "../../store/CartProvider";
 import { useState } from "react";
 import CartModal from "../Cart/CartModal";
-import Footer from "../Footer/Footer";
+import Footer from "../Footer";
 
 export default function RootLayout() {
   // cart버튼 누르면 모달이 열리게 설계

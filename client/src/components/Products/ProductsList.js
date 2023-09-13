@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
+import styled from "styled-components";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -74,9 +75,23 @@ const ProductsList = () => {
     />
   ));
   return (
-    <div>
-      <ul>{productsList}</ul>
-    </div>
+    <ProductsContainer>
+      <div className="pro-list">{productsList}</div>
+    </ProductsContainer>
   );
 };
 export default ProductsList;
+
+const ProductsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  .pro-list {
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    // justify-content: center;
+    // align-items: center;
+  }
+`;
