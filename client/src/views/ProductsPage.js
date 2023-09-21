@@ -1,4 +1,4 @@
-import ProductsList from "../Products/ProductsList";
+import ProductsList from "../components/Products/ProductsList";
 
 function ProductsPage() {
   return <ProductsList />;

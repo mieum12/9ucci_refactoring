@@ -1,5 +1,5 @@
 import React from "react";
-import MyPageBody from "../Mypage/MypageBody";
+import MyPageBody from "../components/Mypage/MypageBody";
 
 const MyPage = () => {
   return <MyPageBody />;

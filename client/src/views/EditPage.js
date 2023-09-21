@@ -1,16 +1,16 @@
 import React from "react";
+import Update from "../components/Edit/Update";
 import styled from "styled-components";
-import ProductGet from "../Admin/ProductGet";
 
-const ProductGetPage = () => {
+const EditPage = () => {
   return (
     <Div>
-      <ProductGet></ProductGet>
+      <Update></Update>
     </Div>
   );
 };
 
-export default ProductGetPage;
+export default EditPage;
 
 const Div = styled.div`
   display: flex;

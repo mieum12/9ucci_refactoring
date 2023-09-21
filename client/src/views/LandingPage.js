@@ -1,5 +1,5 @@
 import React from "react";
-import MainCarousel from "../Main/MainCarousel";
+import MainCarousel from "../components/Main/MainCarousel";
 
 function LandingPage() {
   return <MainCarousel />;

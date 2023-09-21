@@ -1,16 +1,16 @@
 import React from "react";
-import ProductUpdate from "../Edit/ProductEdit";
+import ProductPost from "../components/Admin/ProductPost";
 import styled from "styled-components";
 
-const ProductEditPage = () => {
+const ProductPostPage = () => {
   return (
     <Div>
-      <ProductUpdate></ProductUpdate>
+      <ProductPost></ProductPost>
     </Div>
   );
 };
 
-export default ProductEditPage;
+export default ProductPostPage;
 
 const Div = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import CardContext from "./cart-context";
+import CartContext from "./cart-context";
 
 const defaultCartState = {
   items: [],
@@ -95,6 +95,7 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "CLEAR" });
   };
 
+  // 계속 업데이트가 될 구체적인 컨텍스트 값
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
@@ -104,10 +105,10 @@ const CartProvider = (props) => {
   };
 
   return (
-    <CardContext.Provider value={cartContext}>
-      {/* 이렇게해서 모든 컴포넌트들을 <CardContext.Provider>로 감쌀 수 있다 */}
+    <CartContext.Provider value={cartContext}>
+      {/* 이렇게해서 모든 컴포넌트들을 <CartContext.Provider>로 감쌀 수 있다 */}
       {props.children}
-    </CardContext.Provider>
+    </CartContext.Provider>
   );
 };
 export default CartProvider;

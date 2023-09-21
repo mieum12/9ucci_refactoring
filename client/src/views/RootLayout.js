@@ -1,10 +1,10 @@
 import { Outlet, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../Main/Header";
-import CartProvider from "../../store/CartProvider";
+import Header from "../components/Main/Header";
+import CartProvider from "../store/CartProvider";
 import { useState } from "react";
-import CartModal from "../Cart/CartModal";
-import Footer from "../Footer";
+import CartModal from "../components/Cart/CartModal";
+import Footer from "../components/Footer";
 
 export default function RootLayout() {
   // cart버튼 누르면 모달이 열리게 설계

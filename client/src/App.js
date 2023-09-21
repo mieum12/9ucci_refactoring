@@ -2,19 +2,19 @@ import "./App.css";
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import LandingPage from "./components/views/LandingPage";
-import LoginPage from "./components/views/LoginPage";
-import RegisterPage from "./components/views/RegisterPage";
-import JoinPage from "./components/views/JoinPage";
-import AdminPage from "./components/views/AdminPage";
-import MyPage from "./components/views/MyPage";
-import EditPage from "./components/views/EditPage";
-import ProductEditPage from "./components/views/ProductEditPage";
-import ProductPostPage from "./components/views/ProductPostPage";
-import DeleteOrderPage from "./components/views/DeleteOrderPage";
-import ProductGetPage from "./components/views/ProductGetPage";
-import RootLayout from "./components/views/RootLayout";
-import ProductsPage from "./components/views/ProductsPage";
+import LandingPage from "./views/LandingPage";
+import LoginPage from "./views/LoginPage";
+import RegisterPage from "./views/RegisterPage";
+import JoinPage from "./views/JoinPage";
+import AdminPage from "./views/AdminPage";
+import MyPage from "./views/MyPage";
+import EditPage from "./views/EditPage";
+import ProductEditPage from "./views/ProductEditPage";
+import ProductPostPage from "./views/ProductPostPage";
+import DeleteOrderPage from "./views/DeleteOrderPage";
+import ProductGetPage from "./views/ProductGetPage";
+import RootLayout from "./views/RootLayout";
+import ProductsPage from "./views/ProductsPage";
 
 const router = createBrowserRouter([
   {
