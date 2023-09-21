@@ -4,11 +4,17 @@ import styled from "styled-components";
 
 const HeaderCartBtn = (props) => {
   const [btnIsHighLighted, setBtnIsHighLighted] = useState();
+  // 컨텍스트 자체가 필요하기 때문에 CartContext 객체를 가져온다
+  // useContext를 사용해 CartContext를 전달한다
+  // 이 컨텍스트 객체를 cartCtx 상수에 저장한다
   const cartCtx = useContext(CartContext);
+  //이제 useContext를 사용해 컨텍스트가 변경될 때마다 여기 컴포넌트를 다시 평가하게 된다
 
-  //전체가 아니라 items만 의존성으로 전달할 수 있게
+  //전체가 아니라 items만 의존성으로 전달할 수 있게(cartCtx.items로 접근할 수도 있지만)
   const { items } = cartCtx;
 
+  // 카트 옆에 수량을 나타내는 변수를 만들것!
+  // 데이터 배열을 값 하나로 변환해주는 reduce 사용
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);

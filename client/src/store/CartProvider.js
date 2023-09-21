@@ -6,7 +6,12 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
+//✅ CartProvider 외부에 cartReducer 추가하기: 리듀서 함수는 컴포넌트에서 아무것도 필요로하지 않기때문에, 컴포넌트가 재평가될때마다 재생성되어서는 안되기때문이기도
+// 장바구니 reducer추가하기(좀더 복잡한 상태관리를 위해 = 중복되는게 있는지, 삭제하기 등)
 const cartReducer = (state, action) => {
+  // state는 리듀서에 의해 관리되는 state의 최신 버전, 그리고 이 리듀서 함수에서는 새로운 state를 반환하면 된다!
+  //여기서는 먼저 defaultCartState를 만들어 반환한다
+
   //1.카트에 아이템 추가
   if (action.type === "ADD") {
     // 전체 상품의 수량
@@ -33,7 +38,7 @@ const cartReducer = (state, action) => {
       //기존 존재하는 항목을 updatedItem로 덮어쓰기
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
-      //1-2.중복된 아이템이 없고 새로운 아이템을 추가하는 경우
+      //1-2.중복된 아이템이 없고 새로운 아이템을 추가하는 경우 (배열에 새 항목을 추가하는 concat 사용,기존 배열의 편집이 아닌 새로운 배열을 반환)
       updatedItems = state.items.concat(action.item);
     }
 
@@ -77,15 +82,19 @@ const cartReducer = (state, action) => {
   return defaultCartState;
 };
 
-//cart-context의 데이터를 관리하고, 접근하려는 모든 컴포넌트에 그 데이터를 제공하는 역할을 한다
+//✅ cart-context의 데이터를 관리하고, 접근하려는 모든 컴포넌트에 그 데이터를 제공하는 역할을 한다
 const CartProvider = (props) => {
+  // useReducer를 사용해 cartReducer를 point해준다(실행x) 그러면 리액트가 실행해준다, 초기값은 defaultCartState
+  // useReducer의 두번째 인자인 dispatchCartAction는 리듀서에 액션을 전달, 디스패치해주는 함수이다
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState
   );
 
+  //리듀서 함수 내부에서 ADD 타입의 액션을 전달하는 함수
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: "ADD", item: item });
+    //리듀서 함수에 항목을 추가하기 위해 액션의 일부로 항목을 전달 = 두번째 속성으로 item전달
   };
   const removeItemFromCartHandler = (id) => {
     dispatchCartAction({ type: "REMOVE", id: id });
