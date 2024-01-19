@@ -5,6 +5,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {updateProfile} from "firebase/auth";
 import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import PostProductsForm from "../components/PostProductsForm";
+import {adminId} from "../admin";
 
 
 export default function MyPage(){
@@ -46,7 +47,6 @@ export default function MyPage(){
     }
   };
 
-
   return (
     <Wrapper>
       <AvatarUpload htmlFor='avatar'>
@@ -76,18 +76,19 @@ export default function MyPage(){
           onChange={(e) => setName(e.target.value)}
         />
       ) : (
-        <Name>
+        <div>
           {/*
           아래처럼 짧게 줄일 수 있다!
           {user?.displayName ? user.displayName : 'Anonymous' }
           */}
-          {user?.displayName ?? 'Anonymous' }
-        </Name>
+          <Name>{user?.displayName ?? 'Anonymous' }</Name>
+          <EditBtn onClick={onEdit}>{ edit ? 'SAVE' : 'EDIT' }</EditBtn>
+        </div>
       )}
-      <EditBtn onClick={onEdit}>{ edit ? 'SAVE' : 'EDIT' }</EditBtn>
+      <Email>이메일: {user?.email}</Email>
+      <CreatedAt>가입일: {user?.metadata.creationTime}</CreatedAt>
 
-      <PostProductsForm />
-
+      {(user?.uid === adminId) ? <PostProductsForm/> : ''}
     </Wrapper>
   )
 }
@@ -96,14 +97,15 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  height: 500px;
+  padding: 50px;
+  //gap: 10px;
 `;
 const AvatarUpload = styled.label`
   width: 80px;
   overflow: hidden;
   height: 80px;
   border-radius: 50%;
-  ㅠㅐㄱㅇㄷㄱ
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -121,21 +123,21 @@ const AvatarInput = styled.input`
 `;
 const Name = styled.span`
   font-size: 22px;
+  box-shadow: inset 0 -10px 0 #D9D9D9;
 `;
-
-const Tweets = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 10px;
+const Email = styled.span`
+  color: #8c8c8c;`
+const CreatedAt = styled.span`
+  color: #8c8c8c;
 `
 const EditBtn = styled.button`
-  background-color: black;
+  background-color: #1c6085;
   color: white;
   font-weight: 600;
   border: 1px solid ;
-  font-size: 12px;
+  font-size: 10px;
   padding: 5px 10px;
+  margin-left: 10px;
   text-transform: uppercase;
   border-radius: 5px;
   cursor: pointer;

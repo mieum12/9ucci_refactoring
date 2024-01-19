@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { Link, useNavigate, NavLink, Form } from "react-router-dom";
 import axios from "axios";
 import HeaderCartBtn from "./HeaderCartBtn";
-정import {auth} from "../../firebase";
+import {auth} from "../../firebase";
+import {adminId} from "../../admin";
 
 function Header(props) {
   const navigate = useNavigate();
 
   const user = auth.currentUser
+  console.log('지금 유저는???',user)
 
   const onLogOut = async () => {
     const logOut = window.confirm('로그아웃 하시겠습니까?')
@@ -23,7 +25,7 @@ function Header(props) {
       <div>
         <ul className="nav-list">
           <ul>
-            <NavLink to="/products">SHOP</NavLink>
+            <NavLink to="/shop">SHOP</NavLink>
           </ul>
           { !user ? (<ul>
             <NavLink to="/login">LOGIN/JOIN</NavLink>
@@ -32,7 +34,7 @@ function Header(props) {
             <HeaderCartBtn onClick={props.onShowCart}/>
           </ul>
           <ul>
-            <NavLink to="/mypage">MY PAGE</NavLink>
+            <NavLink to="/mypage">{(user.uid !== adminId) ? 'MY PAGE' : 'ADMIN PAGE'}</NavLink>
           </ul>
           <ul>
             <button onClick={onLogOut} className='log-out'>LOGOUT</button>

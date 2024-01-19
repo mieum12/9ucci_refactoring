@@ -80,7 +80,7 @@ export default function PostProductsForm(){
   }
 
   return <Form onSubmit={onSubmit}>
-    <h3>관리자 전용 상품 등록 폼</h3>
+    <Title>관리자 전용 상품 등록 폼</Title>
     <TextArea
       required
       maxLength={20}
@@ -97,7 +97,7 @@ export default function PostProductsForm(){
     <TextArea
       required
       rows={5}
-      maxLength={180}
+      maxLength={200}
       onChange={onChangeDescription}
       value={description}
       placeholder='상품 설명'/>
@@ -111,12 +111,17 @@ export default function PostProductsForm(){
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  text-align: center;
   gap: 10px;
   width: 400px;
+  margin-top: 50px
+`
+const Title = styled.h3`
+
 `
 const TextArea = styled.textarea`
   border: 1px solid;
-  padding: 20px;
+  padding: 10px;
   border-radius: 20px;
   width: 100%;
   resize: none;
