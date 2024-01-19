@@ -3,23 +3,20 @@ import styled from "styled-components";
 import { Link, useNavigate, NavLink, Form } from "react-router-dom";
 import axios from "axios";
 import HeaderCartBtn from "./HeaderCartBtn";
+정import {auth} from "../../firebase";
 
 function Header(props) {
-  const isLogin = sessionStorage.getItem("user");
-  const isAdmin = sessionStorage.getItem("admin");
   const navigate = useNavigate();
-  const LogoutHandler = async () => {
-    await axios
-      .get(" http://localhost:5000/signout", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data.cookies);
-        navigate("/");
-        sessionStorage.clear();
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+
+  const user = auth.currentUser
+
+  const onLogOut = async () => {
+    const logOut = window.confirm('로그아웃 하시겠습니까?')
+    if (logOut) {
+      await auth.signOut()
+      navigate('/login')
+    }
+  }
 
   return (
     <Nav>
@@ -28,20 +25,19 @@ function Header(props) {
           <ul>
             <NavLink to="/products">SHOP</NavLink>
           </ul>
-          <ul>
-            <HeaderCartBtn onClick={props.onShowCart} />
-          </ul>
-          <ul>
+          { !user ? (<ul>
             <NavLink to="/login">LOGIN/JOIN</NavLink>
+          </ul>) : ( <>
+          <ul>
+            <HeaderCartBtn onClick={props.onShowCart}/>
           </ul>
           <ul>
             <NavLink to="/mypage">MY PAGE</NavLink>
           </ul>
           <ul>
-            <Form action="/logout" method="post" className="logout-btn">
-              <button>LOGOUT</button>
-            </Form>
+            <button onClick={onLogOut} className='log-out'>LOGOUT</button>
           </ul>
+          </>)}
         </ul>
       </div>
     </Nav>
