@@ -19,8 +19,11 @@
 - firebase를 통한 데이ㅓ 및 스토리지 관리
 
 
-[//]: # (관리자 계정)
+### 관리자 계정
 
-[//]: # (admin@admin.com)
+- ID: admin@naver.com
+- PW: 123456
 
-[//]: # (adminadmin)
+### 일반 계정
+- ID: jiwon@naver.com
+- PW: 123456
