@@ -5,15 +5,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./routes/LandingPage";
 import LoginPage from "./routes/LoginPage";
 import JoinPage from "./routes/JoinPage";
-import AdminPage from "./routes/AdminPage";
 import MyPage from "./routes/MyPage";
-import EditPage from "./routes/EditPage";
-import ProductEditPage from "./routes/ProductEditPage";
-import ProductPostPage from "./routes/ProductPostPage";
-import DeleteOrderPage from "./routes/DeleteOrderPage";
-import ProductGetPage from "./routes/ProductGetPage";
 import RootLayout from "./routes/RootLayout";
-import ProductsPage from "./routes/ProductsPage";
+import ShopPage from "./routes/ShopPage";
 
 const router = createBrowserRouter([
   {
@@ -28,13 +22,8 @@ const router = createBrowserRouter([
       { path: "join", element: <JoinPage /> },
 
       { path: "mypage", element: <MyPage /> },
-      { path: "admin", element: <AdminPage /> },
-      { path: "products", element: <ProductsPage /> },
-      // { path: "edit", element: <EditPage /> },
-      // { path: "productedit", element: <ProductEditPage /> },
-      // { path: "productpost", element: <ProductPostPage /> },
-      // { path: "deleteorder", element: <DeleteOrderPage /> },
-      // { path: "product", element: <ProductGetPage /> },
+      { path: 'shop', element: <ShopPage/>}
+
     ],
   },
 ]);
