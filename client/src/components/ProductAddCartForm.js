@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import Input from "../Input";
+import Input from "./Input";
 import styled from "styled-components";
 
-const ProductItemAddForm = (props) => {
+const ProductAddCartForm = (props) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
   const amountInputRef = useRef();
 
@@ -58,11 +58,11 @@ const ProductItemAddForm = (props) => {
   );
 };
 
-export default ProductItemAddForm;
+export default ProductAddCartForm;
 
 const ProductsFormContainer = styled.div`
   .form {
-    text-align: right;
+    //text-align: right;
   }
 
   button {

@@ -2,11 +2,14 @@ import styled from "styled-components";
 import {auth, db, storage} from "../firebase";
 import {deleteDoc, doc, updateDoc} from "firebase/firestore";
 import {deleteObject, ref } from "firebase/storage";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import {adminId} from "../admin";
+import ProductAddCartForm from "./ProductAddCartForm";
+import CartContext from "../store/cart-context";
 
 // Tweet은 이전에 생성한 ITweet 인터페이스를 받게 됨
 // 그 인터페이스 중 원하는 것만 추출해서 가져오기 (username, photo,tweet)
-export default function Product( {id, name, description, price, photo, userId} ) {
+export default function Product( {id, name, description, price, photo} ) {
   const user = auth.currentUser
 
   const [edit, setEdit] = useState(false);
@@ -14,10 +17,24 @@ export default function Product( {id, name, description, price, photo, userId} )
   const [editDescription, setEditDescription] = useState(description);
   const [editPrice, setEditPrice] = useState(price);
 
+  // CartContext를 useContext로 전달한다 연결을 설정하기 위햐
+  const cartCtx = useContext(CartContext);
+
+  //ProductItemAddForm의 onAddToCart함수를 실행하면 이곳까지 들어와 컨텍스트에 도달하게함
+  const addToCartHandler = (amount) => {
+    //이제 이 곳에서 컨텍스트에서 정의된 메소드 중 하나를 호출할 수 있게된다
+    //이제 이 곳에 리듀서에 전달할 항목을 객체로 만들어 보낸다
+    cartCtx.addItem({
+      id: id,
+      name: name,
+      amount: amount,
+      price: price,
+    });
+  };
 
   const onDelete = async () => {
     const ok = window.confirm('이 상품을 정말로 삭제하시겠습니까?')
-    if (!ok || user?.uid !== userId) return;
+    if (!ok || user?.uid !== adminId) return;
 
     try {
       // 삭제할 문서에 대한 참조를 넣어주면 삭제
@@ -38,7 +55,7 @@ export default function Product( {id, name, description, price, photo, userId} )
   }
 
   const onEdit = async () => {
-    if (user?.uid !== userId) return;
+    if (user?.uid !== adminId) return;
 
     if (edit) {
       await updateDoc(doc(db, 'products',id),{
@@ -74,24 +91,28 @@ export default function Product( {id, name, description, price, photo, userId} )
           <div>₩ {Number(price).toLocaleString('ko-KR')}</div>
           <div>{description}</div>
         </Payload>}
-        { user?.uid === userId ? (
+        { user?.uid === adminId ? (
           <>
             <DeleteButton onClick={onDelete}>Delete</DeleteButton>
             <EditBtn onClick={onEdit}>{edit ? 'SAVE' : 'EDIT'}</EditBtn>
           </>
         ) : null }
       </Column>
-      <Column>
+      <PhotoWrapper>
         {photo ? (<Photo src={photo}/>) : null }
-      </Column>
+      </PhotoWrapper>
+      <FormWrapper>
+        <ProductAddCartForm id={id} onAddToCart={addToCartHandler} />
+      </FormWrapper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 20px 200px;
+  grid-template-columns: 3fr 1fr 1fr;
+  padding: 20px;
+  width: 70%;
   border-radius: 15px;
 `
 const Column = styled.div`
@@ -100,8 +121,19 @@ const Column = styled.div`
     place-self: end;
   }
 `
+const PhotoWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+`
+const FormWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+`
 const Name = styled.span`
   font-weight: 800;
+  box-shadow: inset 0 -10px 0 #D9D9D9;
   //font-size: 15px;
 `
 const Payload = styled.p`
