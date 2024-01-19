@@ -51,7 +51,9 @@ const Root = styled.div`
     font-size: 50px;
   }
   .main-container {
-    text-align: center;
+    //height: 100vh;
+    display: flex;
+    justify-content: center;
   }
   .title a {
     color: black;

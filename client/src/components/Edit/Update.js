@@ -78,7 +78,6 @@ const Wrap = styled.div`
   justify-content: center;
 
   padding-top: 30px;
-  width: 1653px;
 `;
 
 const ButtonWrap = styled.div`

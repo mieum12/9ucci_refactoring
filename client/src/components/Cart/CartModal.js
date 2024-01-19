@@ -32,7 +32,7 @@ const CartModal = (props) => {
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
     await fetch(
-      "https://react-cart-88b00-default-rtdb.firebaseio.com/order.json",
+      "https://ucci-de185-default-rtdb.firebaseio.com/order.json",
       {
         method: "POST",
         body: JSON.stringify({

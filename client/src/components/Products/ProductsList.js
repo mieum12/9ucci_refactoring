@@ -11,7 +11,7 @@ const ProductsList = () => {
     const fetchProducts = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://react-cart-88b00-default-rtdb.firebaseio.com/products.json"
+        "https://ucci-de185-default-rtdb.firebaseio.com/products.json"
       );
 
       if (!response.ok) {
