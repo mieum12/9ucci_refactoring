@@ -6,13 +6,14 @@ import {updateProfile} from "firebase/auth";
 import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import PostProductsForm from "../components/PostProductsForm";
 import {adminId} from "../admin";
-
+import MyOrder from "../components/MyOrder";
 
 export default function MyPage(){
   const user = auth.currentUser
   const [avatar, setAvatar] = useState(user?.photoURL)
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(user?.displayName);
+  const [orders, setOrders] = useState([])
   const onAvatarChange = async (e) => {
     const {files} = e.target
     if (!user) return;
@@ -47,8 +48,36 @@ export default function MyPage(){
     }
   };
 
+  const fetchOrders = async () => {
+    const orderQuery = query(collection(db, 'order'),
+      where('userId', '==', user?.uid),
+      orderBy('createdAt','desc'),
+      )
+    // getDocs에 쿼리를 전달해주면 스냅샷 반환
+    const snapshot = await getDocs(orderQuery)
+    const orders = snapshot.docs.map((doc)=>{
+      const {userInfo, orderedItems, createdAt, userId, totalAmount} = doc.data()
+      return {
+        userInfo, orderedItems, createdAt, userId, totalAmount,
+        id: doc.id
+      };
+    });
+    setOrders(orders)
+  }
+
+  const orderList = orders.length === 0
+    ? '주문 내역이 없습니다!'
+    : orders.map((item, idx) => (
+      <MyOrder key={item.id} order={item} index={idx} />
+    ));
+
+  useEffect(()=>{
+    fetchOrders()
+  },[])
+
   return (
     <Wrapper>
+      <h3>나의 프로필</h3>
       <AvatarUpload htmlFor='avatar'>
         { avatar ? (
           <AvatarImg src={avatar}/>
@@ -88,7 +117,15 @@ export default function MyPage(){
       <Email>이메일: {user?.email}</Email>
       <CreatedAt>가입일: {user?.metadata.creationTime}</CreatedAt>
 
+      {/* 나의 주문한 정보*/}
+      <Order>
+        <h3>나의 주문 정보 목록</h3>
+        {orderList}
+      </Order>
+
+      {/*관리자 전용 상품 등록 폼*/}
       {(user?.uid === adminId) ? <PostProductsForm/> : ''}
+
     </Wrapper>
   )
 }
@@ -97,15 +134,11 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 500px;
   padding: 50px;
-  //gap: 10px;
+  gap: 10px;
 `;
 const AvatarUpload = styled.label`
-  width: 80px;
-  overflow: hidden;
-  height: 80px;
-  border-radius: 50%;
+  //overflow: hidden;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -116,7 +149,9 @@ const AvatarUpload = styled.label`
 `;
 
 const AvatarImg = styled.img`
-  width: 100%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 `;
 const AvatarInput = styled.input`
   display: none;
@@ -142,3 +177,9 @@ const EditBtn = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+const Order = styled.div`
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`
