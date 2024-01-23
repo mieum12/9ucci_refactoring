@@ -4,8 +4,10 @@ import CheckOrderForm from "./CheckOrderForm";
 import CartItem from "./CartItem";
 import CartContext from "../../store/cart-context";
 import styled from "styled-components";
+import {addDoc, collection} from "firebase/firestore";
+import {auth, db} from "../../firebase";
 
-const CartModal = (props) => {
+export default function CartModal(props) {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitIsDone, setSubmitIsDone] = useState(false);
@@ -30,21 +32,40 @@ const CartModal = (props) => {
 
   //CheckOrderForm 컴포넌트에서 전달받은 사용자 정보(userData)를 가져온 뒤 백엔드로 전송하기!!
   const submitOrderHandler = async (userData) => {
-    setIsSubmitting(true);
-    await fetch(
-      "https://ucci-de185-default-rtdb.firebaseio.com/order.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderedItems: cartCtx.items,
-        }),
-      }
-    );
-    setIsSubmitting(false);
-    setSubmitIsDone(true);
-    //주문 완료 후 카트 비우기
-    cartCtx.clearCart();
+
+    // await fetch(
+    //   "https://ucci-de185-default-rtdb.firebaseio.com/order.json",
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       user: userData,
+    //       orderedItems: cartCtx.items,
+    //     }),
+    //   }
+    // );
+
+
+    try {
+      setIsSubmitting(true);
+
+      // 데이터베이스에 주문 내역 보내서 저장하기
+      await addDoc(collection(db, 'order'), {
+        // 사용자 정보
+        userInfo: userData,
+        userId: auth.currentUser.uid,
+        // 상품 정보
+        orderedItems: cartCtx.items,
+        totalAmount,
+        createdAt: Date.now(),
+      })
+    } catch (e) {
+      console.log(e)
+    }finally {
+      setIsSubmitting(false);
+      setSubmitIsDone(true);
+      //주문 완료 후 카트 비우기
+      cartCtx.clearCart();
+    }
   };
 
   const cartItems = (
@@ -117,8 +138,6 @@ const CartModal = (props) => {
   );
 };
 
-export default CartModal;
-
 const Total = styled.div`
   display: flex;
   justify-content: right;
@@ -129,20 +148,20 @@ const Total = styled.div`
 
 const ModalBtn = styled.div`
   button {
-    font: inherit;
-    cursor: pointer;
-    background-color: transparent;
-    border: 2px solid;
-    padding: 10px 30px;
-    border-radius: 25px;
-    margin-left: 10px;
-  }
-
-  button:hover,
-  button:active {
-    background-color: black;
-    border-color: black;
+    background-color: #1c6085;
     color: white;
+    font-weight: 600;
+    border: 0;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
   }
 `;
 const IsSubmittingContainer = styled.div`
