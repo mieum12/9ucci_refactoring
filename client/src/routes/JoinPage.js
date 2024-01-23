@@ -1,4 +1,3 @@
-
 import React, {useState} from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "../firebase";
@@ -6,7 +5,6 @@ import {Link, useNavigate} from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import {Input, Switcher, Title, Wrapper, Error, Form} from "../components/auth";
 import GithubButton from "../components/githubBtn";
-
 
 export default function Join(){
   const navigate = useNavigate()

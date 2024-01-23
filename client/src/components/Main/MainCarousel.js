@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const MainCarousel = () => {
+export default function MainCarousel () {
   return (
     <CarouselContainer>
       <Carousel fade>
@@ -28,12 +28,10 @@ const MainCarousel = () => {
   );
 };
 
-export default MainCarousel;
-
 const CarouselContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin: 100px;
 `;
 
 const Img = styled.img`

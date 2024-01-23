@@ -1,8 +1,6 @@
 import React from "react";
 import MainCarousel from "../components/Main/MainCarousel";
 
-function LandingPage() {
+export default function LandingPage() {
   return <MainCarousel />;
 }
-
-export default LandingPage;

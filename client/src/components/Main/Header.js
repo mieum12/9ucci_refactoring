@@ -6,7 +6,7 @@ import HeaderCartBtn from "./HeaderCartBtn";
 import {auth} from "../../firebase";
 import {adminId} from "../../admin";
 
-function Header(props) {
+export default function Header(props) {
   const navigate = useNavigate();
 
   const user = auth.currentUser
@@ -45,8 +45,6 @@ function Header(props) {
     </Nav>
   );
 }
-
-export default Header;
 
 const Nav = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CartItem = (props) => {
+export default function CartItem (props) {
   const price = `${props.price.toLocaleString("ko-KR")}원`;
 
   return (
@@ -19,8 +19,6 @@ const CartItem = (props) => {
     </CartItemContainer>
   );
 };
-
-export default CartItem;
 
 const CartItemContainer = styled.div`
   display: flex;

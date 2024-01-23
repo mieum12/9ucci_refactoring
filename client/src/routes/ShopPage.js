@@ -4,7 +4,6 @@ import styled from "styled-components";
 import {db} from "../firebase";
 import Product from "../components/Product";
 
-
 export default function ShopPage() {
   const [products, setProducts] = useState([])
 

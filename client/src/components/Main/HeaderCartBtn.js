@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CartContext from "../../store/cart-context";
 import styled from "styled-components";
 
-const HeaderCartBtn = (props) => {
+export default function HeaderCartBtn (props) {
   const [btnIsHighLighted, setBtnIsHighLighted] = useState();
   // 컨텍스트 자체가 필요하기 때문에 CartContext 객체를 가져온다
   // useContext를 사용해 CartContext를 전달한다
@@ -43,8 +43,6 @@ const HeaderCartBtn = (props) => {
     </CartBtn>
   );
 };
-
-export default HeaderCartBtn;
 
 const CartBtn = styled.div`
   button {

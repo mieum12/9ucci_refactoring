@@ -17,7 +17,7 @@ const ModalOverlay = (props) => {
 //public>index.html의 overlays div에 접근하기 위해
 const portalElement = document.getElementById("overlays");
 
-const Modal = (props) => {
+export default function Modal (props) {
   return (
     <Fragment>
       {ReactDOM.createPortal(
@@ -31,5 +31,3 @@ const Modal = (props) => {
     </Fragment>
   );
 };
-
-export default Modal;
