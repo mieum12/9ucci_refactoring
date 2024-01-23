@@ -6,6 +6,8 @@ import Product from "../components/Product";
 
 export default function ShopPage() {
   const [products, setProducts] = useState([])
+  const categories = ['ALL', 'TOP', 'BOTTOM','OUTER', 'BAG', 'ETC'];
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]); // 기본값으로 첫 번째 카테고리 선택
 
   // 개발모드에서는 react.js가 useEffect를 2번 호출
   useEffect(()=> {
@@ -44,10 +46,10 @@ export default function ShopPage() {
       unsubscribe =  onSnapshot(productsQuery, (snapshot) => {
         // 트윗 객체 생성
         const products = snapshot.docs.map((doc) => {
-          const { name, description, price, createdAt, photo, userId } = doc.data()
+          const { name, description, price, createdAt, photo, userId, category } = doc.data()
 
           return {
-            name, description, price, createdAt, photo, userId,
+            name, description, price, createdAt, photo, userId, category,
             id: doc.id // id 정보는 한단계 위에 존재라 따로
           };
         });
@@ -65,8 +67,23 @@ export default function ShopPage() {
     };
   },[]);
 
+  const filteredProducts = products.filter((product) => {
+    if (selectedCategory === 'ALL') return product
+    return product.category === selectedCategory;
+  });
+
   return (<Wrapper>
-    {products.map((product) => (
+    <CategoryWrapper>
+      카테고리
+      <select onChange={(e) => setSelectedCategory(e.target.value)} value={selectedCategory}>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </CategoryWrapper>
+    {filteredProducts.map((product) => (
       <Product key={product.id} {...product} />
     ))}
 
@@ -79,4 +96,10 @@ const Wrapper = styled.div`
   //gap: 10px;
   flex-direction: column;
   //overflow-y: scroll;
+`
+const CategoryWrapper = styled.div`
+  display: flex;
+  select {
+    margin-left: 10px;
+  }
 `

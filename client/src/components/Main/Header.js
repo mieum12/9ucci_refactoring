@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate, NavLink, Form } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, NavLink } from "react-router-dom";
 import HeaderCartBtn from "./HeaderCartBtn";
 import {auth} from "../../firebase";
 import {adminId} from "../../admin";
@@ -50,31 +49,28 @@ const Nav = styled.div`
   display: flex;
   justify-content: left;
   margin: 20px;
-  position:relative
+  position:relative;
 
   ul{
-    font-size: 10px;
+    font-size: 20px;
   }
   .nav-list {
     display: flex;
     padding: 0;
     margin: 0;
-    
   }
   .nav-list a {
     text-decoration: none;
     display: flex;
     color: black;
-    
   }
   .logout-btn {
     margin: 0;
   }
   button {
-    border: white solid 0px;
+    border: white solid 0;
     background: none;
     cursor: pointer;
     padding: 0
-  }
   }
 `;

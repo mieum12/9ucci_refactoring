@@ -5,14 +5,22 @@ import {auth, db, storage} from "../firebase";
 import {getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 export default function PostProductsForm(){
-  const [isLoding, setLoding] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const [name, setName] = useState('')
+  const [category, setCategory] = useState('TOP')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [file, setFile] = useState(null)
 
   const onChangeName = (e) => {
     setName(e.target.value)
+  }
+
+  const onChangeCategory = () => {
+    // 선택한 옵션을 가져오기 위해 select 요소를 얻기
+    let selectElement = document.getElementById('category');
+    let selectedValue = selectElement.value;
+    setCategory(selectedValue)
   }
   const onChangeDescription = (e) => {
     setDescription(e.target.value)
@@ -34,17 +42,17 @@ export default function PostProductsForm(){
     e.preventDefault()
     const user = auth.currentUser;
 
-    if( !user || isLoding || name === '' || name.length > 180 ) return;
+    if( !user || isLoading || name === '' || name.length > 180 ) return;
 
     try {
-      setLoding(true)
+      setLoading(true)
       // 어떤 컬렉션, 어떤 경로에 새로운 document를 생성해줄지 정한다
       // 자바스크립트로 원하는 데이터를 만들면 알아서 넣어주게끔!
       // addDoc는 생성된 document의 참조를 프로미스로 반환하기 때문에 변수로 저장해줄 수 있다
       // 결국 doc은 하나의 트윗 인 것이다!
       const doc = await addDoc(collection(db, 'products'), {
-        // name, description, price, createdAt, photo, userId
         name,
+        category,
         description,
         price,
         createdAt: Date.now(),
@@ -68,6 +76,7 @@ export default function PostProductsForm(){
           photo: url
         })
         setName('')
+        setCategory('')
         setDescription('')
         setPrice('')
         setFile(null)
@@ -75,7 +84,7 @@ export default function PostProductsForm(){
     } catch (e) {
       console.log(e)
     } finally {
-      setLoding(false)
+      setLoading(false)
     }
   }
 
@@ -87,6 +96,13 @@ export default function PostProductsForm(){
       onChange={onChangeName}
       value={name}
       placeholder='상품 이름'/>
+    <select id="category" onChange={onChangeCategory}>
+      <option value='TOP'>TOP</option>
+      <option value='BOTTOM'>BOTTOM</option>
+      <option value='OUTER'>OUTER</option>
+      <option value='BAG'>BAG</option>
+      <option value='ETC'>ETC</option>
+    </select>
     <TextArea
       required
       type="number"
@@ -104,7 +120,7 @@ export default function PostProductsForm(){
 
     <AttachFileButton htmlFor='file'>{file ? '첨부완료 ✅' : '📸 사진첨부'}</AttachFileButton>
     <AttachFileInput onChange={onFileChange} type='file' id='file' accept='image/*'/>
-    <SubmitBtn type='submit' value={isLoding ? '상품등록 중...':'상품 등록하기'}/>
+    <SubmitBtn type='submit' value={isLoading ? '상품등록 중...':'상품 등록하기'}/>
   </Form>
 }
 
