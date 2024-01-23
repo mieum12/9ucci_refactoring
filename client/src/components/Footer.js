@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <FootWrapper>
       COPYRIGHT © 9UCCI. All rights reserved.
@@ -10,13 +10,10 @@ const Footer = () => {
   );
 };
 
-export default Footer;
-
 const FootWrapper = styled.div`
 display: flex;
 justify-content: right;
-margin: 200px 50px 50px;
-
+margin: 50px;
 position:relative;
 font-size: 10px;
 color : #D9D9D9;

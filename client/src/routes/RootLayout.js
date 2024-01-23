@@ -51,7 +51,7 @@ const Root = styled.div`
     font-size: 50px;
   }
   .main-container {
-    //height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
   }

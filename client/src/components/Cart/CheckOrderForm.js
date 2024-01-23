@@ -54,7 +54,7 @@ const CheckOrderForm = (props) => {
     }
 
     //우선 카트 컴포넌트로 제출! -> 그 다음 사용자 정보와, 카드 상품 정보를 함께 백엔드로 보낸다
-    //cart 컴포넌트 안에서 지정한 Prop이름 =onConfirm
+    //cart 컴포넌트 안에서 지정한 Prop이름 = onConfirm
     props.onConfirm({
       name: enteredName,
       address: enteredAdress,
@@ -74,7 +74,6 @@ const CheckOrderForm = (props) => {
             <p className="invalid">유효한 이름을 입력해 주세요!</p>
           )}
         </div>
-
         <div>
           <label htmlFor="address">주소</label>
           <input type="text" id="address" ref={addressInputRef} />
@@ -115,6 +114,7 @@ const FromContainer = styled.div`
   height: 250px;
   overflow: auto;
   text-align: center;
+  margin: 20px;
 
   .order-title {
     font-size: 30px;
@@ -142,19 +142,19 @@ const FromContainer = styled.div`
 
 const FormBtn = styled.div`
   button {
-    font: inherit;
-    cursor: pointer;
-    background-color: transparent;
-    border: 2px solid;
-    padding: 10px 30px;
-    border-radius: 25px;
-    margin: 30px 10px;
-  }
-
-  button:hover,
-  button:active {
-    background-color: black;
-    border-color: black;
+    background-color: #1c6085;
     color: white;
+    font-weight: 600;
+    border: 0;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
   }
 `;

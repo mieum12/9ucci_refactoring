@@ -114,7 +114,7 @@ const Form = styled.form`
   text-align: center;
   gap: 10px;
   width: 400px;
-  margin-top: 50px
+  margin: 30px
 `
 const Title = styled.h3`
 

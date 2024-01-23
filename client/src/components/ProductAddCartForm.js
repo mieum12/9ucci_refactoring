@@ -66,18 +66,20 @@ const ProductsFormContainer = styled.div`
   }
 
   button {
-    cursor: pointer;
-    background-color: transparent;
-    border: 2px solid;
-    padding: 5px 15px;
-    border-radius: 25px;
-    margin-top: 10px;
-  }
-
-  button:hover,
-  button:active {
-    background-color: black;
-    border-color: black;
+    background-color: #1c6085;
     color: white;
-  }
+    font-weight: 600;
+    border: 0;
+    font-size: 12px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
+  }  
 `;

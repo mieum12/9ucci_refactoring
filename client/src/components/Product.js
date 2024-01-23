@@ -156,6 +156,10 @@ const DeleteButton = styled.button`
   text-transform: uppercase;
   border-radius: 5px;
   cursor: pointer;
+  &:hover,
+  &:active {
+    opacity: 0.8;
+  }
 `
 const EditBtn = styled.button`
   background-color: #1c6085;
@@ -168,4 +172,8 @@ const EditBtn = styled.button`
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+  &:hover,
+  &:active {
+    opacity: 0.8;
+  }
 `;
